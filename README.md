@@ -1,5 +1,12 @@
 # Ember-async-image
 
+[![npm version](https://badge.fury.io/js/ember-async-image.svg)](http://badge.fury.io/js/ember-async-image)
+[![Build Status](https://travis-ci.org/runspired/ember-async-image.svg)](https://travis-ci.org/runspired/ember-async-image)
+[![Ember Observer Score](http://emberobserver.com/badges/ember-async-image.svg)](http://emberobserver.com/addons/ember-async-image)
+
+A lightweight performance minded image component.
+Extracted from [smoke-and-mirrors](https://github.com/runspired/smoke-and-mirrors)
+
 ## Usage
 
 ```
