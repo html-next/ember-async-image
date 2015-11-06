@@ -1,0 +1,1 @@
+export { default } from 'ember-async-image/components/async-image';
