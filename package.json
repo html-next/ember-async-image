@@ -1,7 +1,7 @@
 {
   "name": "ember-async-image",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "A lightweight performance minded Image component for Ember.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,11 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/runspired/ember-async-image",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Chris Thoburn (@runspired)",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.1.2",
@@ -38,7 +38,10 @@
     "ember-try": "0.0.6"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "image",
+    "async",
+    "preload"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.3",
