@@ -31,6 +31,8 @@ export default Component.extend({
   isLoading: false,
   isFailed: false,
   isEmpty: true,
+  onload: null,
+
   imgState: computed('isLoaded', 'isLoading', 'isFailed', 'isEmpty', function () {
     if (this.get('isFailed')) { return 'is-failed'; }
     if (this.get('isLoading')) { return 'is-loading'; }
@@ -73,6 +75,7 @@ export default Component.extend({
       this.set('isLoaded', true);
       this.set('isLoading', false);
       this.set('isFailed', false);
+      this.sendAction('onload');
     }
   },
 
