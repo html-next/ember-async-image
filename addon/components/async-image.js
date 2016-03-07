@@ -3,7 +3,8 @@ import Ember from 'ember';
 const {
   Component,
   computed,
-  observer
+  observer,
+  run
   } = Ember;
 
 const TRANSPARENT_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -101,10 +102,10 @@ export default Component.extend({
 
       let Img = new Image();
       let loaded = () => {
-        this._onload(Img);
+        run(() => { this._onload(Img); });
       };
       let failed = () => {
-        this._onError(Img);
+        run(() => {this._onError(Img); });
       };
       this._imageLoadHandler = loaded;
       this._imageErrorHandler = failed;
