@@ -92,7 +92,7 @@ export default Component.extend({
   },
 
   _loadImage: observer('src', function() {
-    if (!this.get('fastboot')) { return; }
+    if (this.get('fastboot.isFastBoot')) { return; }
     if (this._image) {
       this.teardownHandlers(this._image);
     }
