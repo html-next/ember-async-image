@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import isBrowser from 'ember-async-image/utils/is-browser';
 
 const {
   Component,
@@ -132,7 +133,7 @@ export default Component.extend({
 
   init() {
     this._super();
-    this._loadImage();
+    if (isBrowser) { this._loadImage(); }
   }
 
 });

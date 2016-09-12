@@ -1,0 +1,1 @@
+export { default } from 'ember-async-image/utils/is-browser';
