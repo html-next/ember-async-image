@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import getOwner from 'ember-getowner-polyfill';
 
 const {
   Component,
@@ -11,6 +12,11 @@ const TRANSPARENT_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAE
 
 export default Component.extend({
   tagName: 'img',
+
+  fastboot: Ember.computed(function() {
+    let owner = getOwner(this);
+    return owner.lookup('service:fastboot');
+  }),
 
   // attributes
   title: null,
@@ -86,6 +92,7 @@ export default Component.extend({
   },
 
   _loadImage: observer('src', function() {
+    if (this.get('fastboot.isFastBoot')) { return; }
     if (this._image) {
       this.teardownHandlers(this._image);
     }
