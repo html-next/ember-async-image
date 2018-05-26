@@ -51,7 +51,7 @@
     "preload"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.5",
+    "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^1.0.1",
     "ember-getowner-polyfill": "^1.0.1"
   },
