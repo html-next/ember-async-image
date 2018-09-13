@@ -71,7 +71,12 @@ export default Component.extend({
       this.set('isLoaded', true);
       this.set('isLoading', false);
       this.set('isFailed', false);
-      this.sendAction('onload');
+
+      let onLoad = this.get('onload');
+
+      if (onLoad) {
+        onLoad();
+      }
     }
   },
 
