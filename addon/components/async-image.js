@@ -1,11 +1,6 @@
-import Ember from 'ember';
-
-const {
-  Component,
-  computed,
-  observer,
-  run
-  } = Ember;
+import Component from '@ember/component';
+import { observer, computed } from '@ember/object';
+import { run } from '@ember/runloop';
 
 const TRANSPARENT_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
