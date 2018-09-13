@@ -39,8 +39,9 @@ export default Component.extend({
 
   _imageLoadHandler: null,
   _imageErrorHandler: null,
+
   willDestroy() {
-    this._super();
+    this._super(...arguments);
     this.teardownImage();
   },
 
@@ -124,15 +125,13 @@ export default Component.extend({
       if (Img.complete || Img.readyState === 4) {
         loaded();
       }
-
     } else {
       this.teardownImage();
     }
   }),
 
   init() {
-    this._super();
+    this._super(...arguments);
     this._loadImage();
   }
-
 });
