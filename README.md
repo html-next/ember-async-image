@@ -13,7 +13,7 @@ Extracted from [smoke-and-mirrors](https://github.com/runspired/smoke-and-mirror
 
 ## Usage
 
-```
+```hbs
 {{async-image
   src=(if attrs.imageSrc attrs.imageSrc attrs.imagePlaceholder)
   alt=attrs.imageAlt
