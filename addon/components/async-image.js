@@ -1,12 +1,6 @@
-import Ember from 'ember';
-import getOwner from 'ember-getowner-polyfill';
-
-const {
-  Component,
-  computed,
-  observer,
-  run
-  } = Ember;
+import Component from '@ember/component';
+import { observer, computed } from '@ember/object';
+import { run } from '@ember/runloop';
 
 const TRANSPARENT_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
@@ -50,8 +44,9 @@ export default Component.extend({
 
   _imageLoadHandler: null,
   _imageErrorHandler: null,
+
   willDestroy() {
-    this._super();
+    this._super(...arguments);
     this.teardownImage();
   },
 
@@ -82,7 +77,12 @@ export default Component.extend({
       this.set('isLoaded', true);
       this.set('isLoading', false);
       this.set('isFailed', false);
-      this.sendAction('onload');
+
+      let onLoad = this.get('onload');
+
+      if (onLoad) {
+        onLoad();
+      }
     }
   },
 
@@ -131,15 +131,13 @@ export default Component.extend({
       if (Img.complete || Img.readyState === 4) {
         loaded();
       }
-
     } else {
       this.teardownImage();
     }
   }),
 
   init() {
-    this._super();
+    this._super(...arguments);
     this._loadImage();
   }
-
 });
