@@ -1,11 +1,24 @@
 import Component from '@ember/component';
-import { observer, computed } from '@ember/object';
-import { run } from '@ember/runloop';
+import {
+  observer,
+  computed
+} from '@ember/object';
+import {
+  run
+} from '@ember/runloop';
+import {
+  getOwner
+} from '@ember/application';
 
 const TRANSPARENT_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
 export default Component.extend({
   tagName: 'img',
+
+  fastboot: Ember.computed(function () {
+    let owner = getOwner(this);
+    return owner.lookup('service:fastboot');
+  }),
 
   // attributes
   title: null,
@@ -30,10 +43,18 @@ export default Component.extend({
   onload: null,
 
   imgState: computed('isLoaded', 'isLoading', 'isFailed', 'isEmpty', function () {
-    if (this.get('isFailed')) { return 'is-failed'; }
-    if (this.get('isLoading')) { return 'is-loading'; }
-    if (this.get('isLoaded')) { return 'is-loaded'; }
-    if (this.get('isEmpty')) { return 'is-empty'; }
+    if (this.get('isFailed')) {
+      return 'is-failed';
+    }
+    if (this.get('isLoading')) {
+      return 'is-loading';
+    }
+    if (this.get('isLoaded')) {
+      return 'is-loaded';
+    }
+    if (this.get('isEmpty')) {
+      return 'is-empty';
+    }
     return 'unknown';
   }),
 
@@ -81,12 +102,15 @@ export default Component.extend({
     }
   },
 
-  _onError(/*Image*/) {
+  _onError( /*Image*/ ) {
     this.set('isFailed', true);
     this.teardownImage();
   },
 
-  _loadImage: observer('src', function() {
+  _loadImage: observer('src', function () {
+    if (this.get('fastboot.isFastBoot')) {
+      return;
+    }
     if (this._image) {
       this.teardownHandlers(this._image);
     }
@@ -103,10 +127,14 @@ export default Component.extend({
 
       let Img = new Image();
       let loaded = () => {
-        run(() => { this._onload(Img); });
+        run(() => {
+          this._onload(Img);
+        });
       };
       let failed = () => {
-        run(() => {this._onError(Img); });
+        run(() => {
+          this._onError(Img);
+        });
       };
       this._imageLoadHandler = loaded;
       this._imageErrorHandler = failed;
