@@ -15,7 +15,7 @@ const TRANSPARENT_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAE
 export default Component.extend({
   tagName: 'img',
 
-  fastboot: Ember.computed(function () {
+  fastboot: computed(function () {
     let owner = getOwner(this);
     return owner.lookup('service:fastboot');
   }),
