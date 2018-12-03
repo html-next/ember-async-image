@@ -1,6 +1,6 @@
 {
   "name": "ember-async-image",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A lightweight performance minded Image component for Ember.",
   "keywords": [
     "ember-addon",
