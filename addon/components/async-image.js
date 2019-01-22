@@ -4,7 +4,7 @@ import {
   computed
 } from '@ember/object';
 import {
-  run
+  join
 } from '@ember/runloop';
 import {
   getOwner
@@ -127,12 +127,12 @@ export default Component.extend({
 
       let Img = new Image();
       let loaded = () => {
-        run(() => {
+        join(() => {
           this._onload(Img);
         });
       };
       let failed = () => {
-        run(() => {
+        join(() => {
           this._onError(Img);
         });
       };
