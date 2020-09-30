@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { buildWaiter } from 'ember-test-waiters';
 import {
   observer,
   computed
@@ -11,6 +12,8 @@ import {
 } from '@ember/application';
 
 const TRANSPARENT_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+let waiter = buildWaiter('ember-async-image:image-loaded-waiter');
 
 export default Component.extend({
   tagName: 'img',
@@ -99,12 +102,18 @@ export default Component.extend({
       if (onLoad) {
         onLoad();
       }
+      this._endTestWaiter();
     }
   },
 
   _onError( /*Image*/ ) {
     this.set('isFailed', true);
     this.teardownImage();
+    this._endTestWaiter();
+  },
+
+  _endTestWaiter() {
+    waiter.endAsync(this._waiterToken);
   },
 
   _loadImage: observer('src', function () {
@@ -123,6 +132,9 @@ export default Component.extend({
     let src = this.get('src');
 
     if (src) {
+      // set test waiter
+      this._waiterToken = waiter.beginAsync();
+      
       this.set('isLoading', true);
 
       let Img = new Image();
