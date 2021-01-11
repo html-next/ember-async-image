@@ -20,3 +20,25 @@ Extracted from [smoke-and-mirrors](https://github.com/runspired/smoke-and-mirror
   title=attrs.imageTitle
 }}
 ```
+
+### Test Helper
+
+Sometimes you want to wait for all async images on a page to load during tests. `waitUntilAllAsyncImagesAreLoaded` can be use to wait for all image to finish loading during a test. For instance you use visual regression testing and need to ensure all async images are loaded before taking a snapshot.
+
+```js
+import { visit } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { takeVisualRegressionSnapshot } from 'my-great-visual-regression-testing-lib';
+import { waitUntilAllAsyncImagesAreLoaded } from 'ember-async-image/test-support';
+
+module('Acceptance | dashboard', function (hooks) {
+  setupApplicationTest(hooks);
+
+  test('no visual regressions', async function(assert) {
+    visit('/page-with-async-images');
+    await waitUntilAllAsyncImagesAreLoaded();
+    await takeVisualRegressionSnapshot();
+  });
+});
+```
