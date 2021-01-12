@@ -3,17 +3,14 @@ language: node_js
 node_js:
   # we recommend testing addons with the same minimum supported node version as Ember CLI
   # so that your addon works for all apps
-  - "6"
+  - "12"
 
 sudo: false
-dist: trusty
 
 addons:
   chrome: stable
 
-cache:
-  directories:
-    - $HOME/.npm
+cache: npm
 
 env:
   global:
@@ -47,7 +44,6 @@ jobs:
 
 before_install:
   - npm config set spin false
-  - npm install -g npm@4
   - npm --version
 
 script:
